@@ -15,6 +15,8 @@ app.use(express.urlencoded({extended:false}))
 
 // api
 app.use("/api/user",require("./route/UserAuthRoute"))
+app.use("/api/contact",require("./route/contactRouter"))
+app.use("/api/incident",require("./route/incidentRoute"))
 
 
 app.listen(3000,()=>{

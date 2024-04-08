@@ -1,3 +1,5 @@
+const mongoose = require("mongoose")
+
 const contactSchema = mongoose.Schema({
     fullName:{
         type:String,
@@ -11,13 +13,19 @@ const contactSchema = mongoose.Schema({
     },
     email:{
         type:String,
-        // unique:true,
-        // required:false
+        unique:true,
+        required:false
     },
     relationship:{
         type:String,
         unique:true,
         required:false
+    },
+
+    user:{
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
     }
 },
 { timestamps: true }

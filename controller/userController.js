@@ -11,7 +11,7 @@ const { sendingResetPasswordLink } = require("../middleware/sendingResetPassword
 
 // 
 const getAllUsers =asyncHandler(async(req,res)=>{
-      const users = await User.find()
+      const users = await User.find().exec()
       return res.status(200).json(users)
   })
 
@@ -58,7 +58,7 @@ const register = asyncHandler(async(req,res)=>{
 
   const newUser = new User(data)
   
-  await  newUser.save();
+  await newUser.save();
   res.status(200).json({message:"Registration Successful"})    
 })
 
@@ -125,20 +125,7 @@ const login = asyncHandler(async(req,res)=>{
     return res.status(200).json({ message: "Login Successful", data: user, token });
 })
 
-// ======= login token =======
-const verifyToken = asyncHandler(async (req, res, next) => {
-  
-    const token = req.headers.authorization.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
-    const decoded = await jwt.verify(token, process.env.SECRET_KEY);
-    if (!decoded) {
-      throw new Error();
-    }
-    req.user = decoded;
-    next()
-});
+
 
 // ======= password reset request =======
 
@@ -193,4 +180,4 @@ const resetPassword =asyncHandler(async(req,res)=>{
   res.send("password reset successfully.");
 })
 
-module.exports = {getUser,getAllUsers,register,verifyEmail,resendOpt,login,verifyToken,requestPasswordReset,resetPassword}
+module.exports = {getUser,getAllUsers,register,verifyEmail,resendOpt,login,requestPasswordReset,resetPassword}

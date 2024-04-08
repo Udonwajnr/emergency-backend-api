@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const {getAllUsers,getUser,register,verifyEmail,resendOpt,login,verifyToken,requestPasswordReset,resetPassword} = require("../controller/userController") 
+const {getAllUsers,getUser,register,verifyEmail,resendOpt,login,requestPasswordReset,resetPassword} = require("../controller/userController") 
+const isAuth = require("../middleware/isAuth")
 
 router.route("/").get(getAllUsers)
 router.route("/:id").get(getUser)
