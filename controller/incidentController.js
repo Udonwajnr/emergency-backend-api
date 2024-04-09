@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler")
 const Incident = require("../model/incident")
+const {validationResult} =require('express-validator')
 
 const getAllIncident = asyncHandler(async(req,res)=>{
     const incident = await Incident.find()
@@ -16,6 +17,11 @@ const getIncident = asyncHandler(async(req,res)=>{
 
 
 const createIncident=asyncHandler(async(req,res)=>{
+    const error = validationResult(req)
+    if(!error.isEmpty()){
+        return res.status(400).json({error:error.array()})
+    }
+    
     const incident = new Incident({
         incidentLocation:req.body.incidentLocation,
         natureOfIncident:req.body.natureOfIncident,

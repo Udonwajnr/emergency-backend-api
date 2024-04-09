@@ -9,16 +9,16 @@ const contactSchema = mongoose.Schema({
     phoneNumber:{
         type:String,
         required:true,
-        unique:true
+        unique:false
     },
     email:{
         type:String,
-        unique:true,
+        unique:false,
         required:false
     },
     relationship:{
         type:String,
-        unique:true,
+        unique:false,
         required:false
     },
     user:{

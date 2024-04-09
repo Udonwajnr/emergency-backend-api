@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler")
 const Contact = require("../model/contact")
+const {validationResult} =require('express-validator')
+
 
 const getAllContacts = asyncHandler(async(req,res)=>{
     const contacts = await Contact.find().populate("user")
@@ -16,6 +18,11 @@ const getContact = asyncHandler(async(req,res)=>{
 })
 
 const createContact=asyncHandler(async(req,res)=>{
+    const error = validationResult(req)
+    if(!error.isEmpty()){
+        return res.status(400).json({error:error.array()})
+    }
+    
     const contact = new Contact({
         fullName:req.body.fullName,
         phoneNumber:req.body.phoneNumber,

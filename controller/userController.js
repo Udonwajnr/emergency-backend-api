@@ -8,6 +8,7 @@ const { sendingOtp } = require("../middleware/sendingOtpMail")
 const JWT = require("jsonwebtoken")
 const crypto = require("crypto")
 const { sendingResetPasswordLink } = require("../middleware/sendingResetPasswordLink")
+const {validationResult} =require('express-validator')
 
 // 
 const getAllUsers =asyncHandler(async(req,res)=>{
@@ -30,6 +31,12 @@ const getUser=asyncHandler(async(req,res)=>{
  */
 
 const register = asyncHandler(async(req,res)=>{
+  const error = validationResult(req)
+    if(!error.isEmpty()){
+        return res.status(400).json({error:error.array()})
+    }
+
+  
   const {fullName,email,phoneNumber,password,otp} = req.body  
   let user = await User.findOne({
     email:email
@@ -85,6 +92,7 @@ const verifyEmail =asyncHandler(async(req,res)=>{
 
 // ======= resend otp =======
 const resendOpt =asyncHandler(async(req,res)=>{
+  
   const {email} = req.body
   const user = await User.findOne({
     email

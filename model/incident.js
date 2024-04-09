@@ -4,21 +4,19 @@ const incidentSchema = mongoose.Schema({
     incidentLocation:{
         type:String,
         required:true,
-        unique:true
     },
     natureOfIncident:{
         type:String,
         required:true,
-        unique:true
     },
     comment:{
         type:String,
-        unique:true,
+        unique:false,
         required:false
     },
     fileUrl:{
         type:String,
-        unique:true,
+        unique:false,
         required:false
     },
     user:{
