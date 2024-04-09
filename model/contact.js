@@ -21,7 +21,6 @@ const contactSchema = mongoose.Schema({
         unique:true,
         required:false
     },
-
     user:{
     type: mongoose.Types.ObjectId,
     ref: "User",

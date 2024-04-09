@@ -20,7 +20,12 @@ const incidentSchema = mongoose.Schema({
         type:String,
         unique:true,
         required:false
-    }
+    },
+    user:{
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+        required: true,
+        }
 },
 { timestamps: true }
 )
