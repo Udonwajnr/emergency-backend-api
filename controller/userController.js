@@ -188,4 +188,5 @@ const resetPassword =asyncHandler(async(req,res)=>{
   res.send("password reset successfully.");
 })
 
+
 module.exports = {getUser,getAllUsers,register,verifyEmail,resendOpt,login,requestPasswordReset,resetPassword}
