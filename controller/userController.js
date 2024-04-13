@@ -122,7 +122,7 @@ const login = asyncHandler(async(req,res)=>{
     const passwordMatch = await bcrypt.compare(password,user.password);
     
     if (!passwordMatch) {
-      return res.status(401).json({ message: "Invalid username or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const token = JWT.sign({id:user._id,email:user.email},
