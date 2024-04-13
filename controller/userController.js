@@ -47,7 +47,7 @@ const register = asyncHandler(async(req,res)=>{
     return res.status(422).json({msg:"Email is Already registered"})
     }
 
-    const generatedUserOtp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+    const generatedUserOtp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false,lowerCaseAlphabets:false });
   await sendingOtp({
     otp:generatedUserOtp
     })
