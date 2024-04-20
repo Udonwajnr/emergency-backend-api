@@ -9,7 +9,6 @@ const getAllContacts = asyncHandler(async(req,res)=>{
     return res.status(200).json(contacts)
 })
 
-
 const getContact = asyncHandler(async(req,res)=>{
     const contact = await Contact.findById(req.params.id).populate("user")
     if(!contact){
