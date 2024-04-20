@@ -12,12 +12,12 @@ const {validationResult} =require('express-validator')
 
 // 
 const getAllUsers =asyncHandler(async(req,res)=>{
-      const users = await User.find().exec()
+      const users = await User.find().populate("contact")
       return res.status(200).json(users)
   })
 
 const getUser=asyncHandler(async(req,res)=>{
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id).populate("contact")
     if(!user){
       return res.status(400).json({msg:"User does not exist"})
     }
@@ -36,7 +36,6 @@ const register = asyncHandler(async(req,res)=>{
         return res.status(400).json({error:error.array()})
     }
 
-  
   const {fullName,email,phoneNumber,password,otp} = req.body  
   let user = await User.findOne({
     email:email

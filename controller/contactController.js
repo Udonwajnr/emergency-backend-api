@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler")
 const Contact = require("../model/contact")
 const {validationResult} =require('express-validator')
+const User = require("../model/user")
 
 
 const getAllContacts = asyncHandler(async(req,res)=>{
@@ -31,6 +32,12 @@ const createContact=asyncHandler(async(req,res)=>{
         user:req.body.user
     })
     await contact.save()
+
+    const userById = await User.findById(req.body.user)
+    userById.contact.push(contact);
+    await userById.save();
+
+    
     res.status(200).json({message:"Contact Created Successfully"})    
 })
 

@@ -24,6 +24,13 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     },
+    contact:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Contact',
+            required:false
+        }
+    ]
 },
 { timestamps: true }
 )
