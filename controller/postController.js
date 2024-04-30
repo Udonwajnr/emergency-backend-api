@@ -7,6 +7,14 @@ const getAllPosts = asyncHandler(async(req,res)=>{
     return res.status(200).json(posts)
 })
 
+const getPost = asyncHandler(async(req,res)=>{
+    const post = await Post.findById(req.params.id)
+    if(!post){
+      return res.status(400).json({msg:"Incident does not exist"})
+    }
+    return res.status(200).json(post)
+})
+
 const createPost = asyncHandler(async(req,res)=>{
     const error = validationResult(req)
     if(!error.isEmpty()){
@@ -41,4 +49,4 @@ const deletePost=asyncHandler(async(req,res)=>{
 })
 
 
-module.exports={getAllPosts,createPost,updatePost,deletePost}
+module.exports={getAllPosts,createPost,updatePost,deletePost,getPost}
