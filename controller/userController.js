@@ -47,10 +47,7 @@ const register = asyncHandler(async(req,res)=>{
     }
 
     const generatedUserOtp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false,lowerCaseAlphabets:false });
-  await sendingOtp({
-    otp:generatedUserOtp
-    })
-    
+        
     // const token = JWT.sign({id:user._id},process.env.JWT_SECRET)
     let data = {
       fullName,
@@ -64,7 +61,13 @@ const register = asyncHandler(async(req,res)=>{
 
   const newUser = new User(data)
   
+
   await newUser.save();
+  
+  await sendingOtp({
+    otp:newUser.otp,
+    user:newUser.email
+    })
   res.status(200).json({message:"Registration Successful"})    
 })
 

@@ -1,6 +1,6 @@
 const dotenv = require('dotenv').config()
 const nodemailer = require("nodemailer")
-
+  
 const sendingOtp=async(params)=>{
     let config = {
       service: 'gmail', // your email domain
@@ -16,15 +16,15 @@ const sendingOtp=async(params)=>{
     let transporter = nodemailer.createTransport(config)
     let message = {
       "from": 'udonwajnr10@gmail.com', // sender address
-      "to": "umohu67@gmail.com", // list of receivers
-      "subject": 'Welcome to Resqme!', // Subject line
+      "to": `${params.user}`, // list of receivers
+      "subject": 'Welcome to Emergency Response Coordination system', // Subject line
       "html": `
       <div
       class="container"
       style="max-width: 90%; margin: auto; padding-top: 20px"
     >
-      <h2>Welcome to the club.</h2>
-      <h4>You are officially In ✔</h4>
+      <h2>Welcome to the Emergency Response Coordination system.</h2>
+      
       <p style="margin-bottom: 30px;">Pleas enter the sign up OTP to get started</p>
       <h1 style="font-size: 40px; letter-spacing: 2px; text-align:center;">${params.otp}</h1>
     </div>
