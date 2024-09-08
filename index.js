@@ -20,7 +20,7 @@ app.use("/api/incident",require("./route/incidentRoute"))
 app.use("/api/post",require("./route/postRouter"))
 
 app.listen(3000,()=>{
-    console.log("And it begins")
+    console.log("And it begins and the updates has been done too")
 })
 
 connectDB()
